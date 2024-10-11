@@ -178,6 +178,7 @@ class FNFSprite extends FlxSprite
 		var rawJson:Dynamic;
 
 		if(mod){
+			#if MODS_ALLOWED
 			var path:String = Paths.modFolders(characterPath);
 			trace(':)');
 			if (!FileSystem.exists(path)) {
@@ -186,6 +187,7 @@ class FNFSprite extends FlxSprite
 			}
 
 			rawJson = File.getContent(path);
+			#end
 
 		}else{
 			var path:String = Paths.getPreloadPath(characterPath);

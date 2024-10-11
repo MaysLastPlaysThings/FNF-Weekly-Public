@@ -90,7 +90,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			var files = [#if MODS_ALLOWED Paths.modFolders(baseFile), #end Paths.getPreloadPath(baseFile)];
 			for (file in files)
 			{
-				if (FileSystem.exists(file))
+				if (Assets.exists(file))
 				{
 					#if LUA_ALLOWED
 					if (ext == 'hscript' || ext == "hxs" || ext == "hx"){

@@ -22,13 +22,6 @@ import meta.data.*;
 import meta.states.*;
 import meta.states.editors.*;
 import gameObjects.*;
-#if sys
-import openfl.media.Sound;
-import sys.FileSystem;
-import sys.io.File;
-#end
-import windows.*;
-
 using StringTools;
 
 class FunkinHScript extends FunkinScript
@@ -55,7 +48,7 @@ class FunkinHScript extends FunkinScript
 		catch (e:haxe.Exception)
 		{
 			var errMsg = 'Error parsing hscript! '#if hscriptPos + '$name:' + parser.line + ', ' #end + e.message;
-			#if desktop
+			#if (desktop || mobile)
 			Application.current.window.alert(errMsg, "Error on haxe script!");
 			#end
 			trace(errMsg);
@@ -73,14 +66,14 @@ class FunkinHScript extends FunkinScript
 	{
 		if (name == null)
 			name = file;
-		return fromString(File.getContent(file), name, additionalVars);
+		return fromString(Assets.getText(file), name, additionalVars);
 	}
 	
 	public static function parseFile(file:String, ?name:String)
 	{
 		if (name == null)
 			name = file;
-		return parseString(File.getContent(file), name);
+		return parseString(Assets.getText(file), name);
 	}
 
 	var interpreter:Interp = new Interp();
@@ -564,7 +557,7 @@ class HScriptSubstate extends meta.states.substate.MusicBeatSubstate
 
 		for (filePath in [#if MODS_ALLOWED Paths.modFolders(fileName), Paths.mods(fileName), #end Paths.getPreloadPath(fileName)])
 		{
-			if (!FileSystem.exists(filePath)) continue;
+			if (!Assets.exists(filePath)) continue;
 
 			// some shortcuts
 			var variables = new Map<String, Dynamic>();

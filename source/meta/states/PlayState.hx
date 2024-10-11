@@ -634,10 +634,12 @@ class PlayState extends MusicBeatState
 		}
 		if(SONG.arrowSkin != ''){
 			for(ext in hscriptExts){
-				if(FileSystem.exists(Paths.noteskin('${SONG.arrowSkin}.$ext'))){
+				if(Assets.exists(Paths.noteskin('${SONG.arrowSkin}.$ext'))){
 					noteskinScript = FunkinHScript.fromFile(Paths.noteskin('${SONG.arrowSkin}.$ext'));
 					break;
-				}else if(FileSystem.exists(Paths.modsNoteskin('${SONG.arrowSkin}.$ext'))){
+				}
+				#if MODS_ALLOWED
+				else if(FileSystem.exists(Paths.modsNoteskin('${SONG.arrowSkin}.$ext'))){
 					//Noteskin doesn't exist in assets, trying mods folder
 					noteskinScript = FunkinHScript.fromFile(Paths.modsNoteskin('${SONG.arrowSkin}.$ext'));
 					break;
@@ -648,6 +650,7 @@ class PlayState extends MusicBeatState
 					// 	FlxG.switchState(new meta.states.substate.CrashReportSubstate(FlxG.state, 'Noteskin not found.', 'noteskin script doesnt exist: ${Paths.noteskin('${SONG.arrowSkin}.$ext')}'));
 					// ^^ this is stupid why did i think to do this
 				}
+				#end
 			}
 			trace(arrowSkins);
 		}
