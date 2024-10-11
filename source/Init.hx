@@ -11,8 +11,6 @@ import flixel.FlxG;
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.transition.FlxTransitionableState;
 import lime.app.Application;
-import meta.data.Discord.DiscordClient;
-
 
 class Init extends FlxState
 {

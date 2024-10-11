@@ -333,8 +333,8 @@ class FunkinHScript extends FunkinScript
 
 			try{				
 				runtime = new FlxRuntimeShader(
-					fragFile==null ? null : Paths.getContent(Paths.modsShaderFragment(fragFile)), 
-					vertFile==null ? null : Paths.getContent(Paths.modsShaderVertex(vertFile))
+					fragFile==null ? null : Paths.getContent(Paths.shaderFragment(fragFile)), 
+					vertFile==null ? null : Paths.getContent(Paths.shaderVertex(vertFile))
 				);
 			}catch(e:Dynamic){
 				trace("Shader compilation error:" + e.message);
@@ -427,7 +427,9 @@ class FunkinHScript extends FunkinScript
 
 		set("ScriptState", HScriptState);
 		set("newScriptedState", function(stateName:String){
+			#if MODS_ALLOWED
 			return new HScriptState(fromFile(Paths.modFolders('states/$stateName.hscript')));
+			#end
 		});
 		
 		set("add", FlxG.state.add);

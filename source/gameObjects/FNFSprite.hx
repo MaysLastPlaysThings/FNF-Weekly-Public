@@ -175,7 +175,7 @@ class FNFSprite extends FlxSprite
 
 	public function getCharacterFile(character:String, ?mod:Bool = false){
 		var characterPath:String = 'characters/' + character + '.json';
-		var rawJson:Dynamic;
+		var rawJson:String = '';
 
 		if(mod){
 			#if MODS_ALLOWED

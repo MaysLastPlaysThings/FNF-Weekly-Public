@@ -102,17 +102,13 @@ class Song
 		#end
 
 		if(rawJson == null) {
-			if(mod){
-				rawJson = File.getContent(moddyFile).trim();
-			}else{
+	    }else{
 				#if MODS_ALLOWED
 				rawJson = File.getContent(Paths.json(formattedFolder + '/' + formattedSong)).trim();
 				#else
 				rawJson = Assets.getText(Paths.json(formattedFolder + '/' + formattedSong)).trim();
 				#end	
-			}
-		}
-
+	    }
 		while (!rawJson.endsWith("}"))
 		{
 			rawJson = rawJson.substr(0, rawJson.length - 1);

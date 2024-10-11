@@ -2969,10 +2969,14 @@ class ChartingState extends MusicBeatState
 				if(noteskinScript == null){
 					if(FileSystem.exists(Paths.noteskin('${_song.arrowSkin}.$ext'))){
 						noteskinScript = FunkinHScript.fromFile(Paths.noteskin('${_song.arrowSkin}.$ext'));
-					}else if(FileSystem.exists(Paths.modsNoteskin('${_song.arrowSkin}.$ext'))){
+					}
+					#if MODS_ALLOWED
+					else if(FileSystem.exists(Paths.modsNoteskin('${_song.arrowSkin}.$ext'))){
 						//Noteskin doesn't exist in assets, trying mods folder
 						noteskinScript = FunkinHScript.fromFile(Paths.modsNoteskin('${_song.arrowSkin}.$ext'));
-					}else{
+					}
+					#end
+					else{
 						noteskinScript = null;
 					}						
 				}

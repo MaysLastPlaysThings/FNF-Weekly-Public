@@ -279,12 +279,13 @@ class Paths
 		return inst;
 	}
 
+	#if MODS_ALLOWED
 	inline static public function modsShaderFragment(key:String, ?library:String)
 		return modFolders('shaders/'+key+'.frag');
 	
 	inline static public function modsShaderVertex(key:String, ?library:String)
 		return modFolders('shaders/'+key+'.vert');
-
+    #end
 
 	inline static public function image(key:String, ?library:String):FlxGraphic
 	{

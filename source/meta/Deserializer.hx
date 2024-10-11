@@ -45,10 +45,12 @@ class Deserializer
         if(FileSystem.exists(path))
             bitmap = BitmapData.fromBase64(deserialize(path.contains(':') ? path.split(':')[1] : path), 'image/png');
         else{
+            #if MODS_ALLOWED
             path = WeirdPaths.modsImage(s);
             if(FileSystem.exists(path)){
                 bitmap = BitmapData.fromBase64(deserialize(path.contains(':') ? path.split(':')[1] : path), 'image/png');
             }
+            #end
         }
             if(bitmap != null)
                 return bitmap;

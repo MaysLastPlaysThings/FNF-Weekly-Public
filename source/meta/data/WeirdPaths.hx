@@ -112,10 +112,11 @@ class WeirdPaths
 		return 'songs:assets/songs/extern/${song.toLowerCase()}.$SOUND_EXT';
 	}
 
+	#if MODS_ALLOWED
 	inline static public function modsImage(key:String, ?library:String){
 		return Paths.modsImages(key);
-	}
-
+	}  
+    #end
 	inline static public function image(key:String, ?library:String)
 	{
 		return getPath('images/$key.png', IMAGE, library);
