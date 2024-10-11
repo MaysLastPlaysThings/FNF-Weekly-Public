@@ -27,8 +27,10 @@ class Init extends FlxState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		meta.data.WeekData.loadTheFirstEnabledMod();
+		#end
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = muteKeys;
@@ -70,21 +72,18 @@ class Init extends FlxState
 		}
 		#end
 
-		#if HIT_SINGLE FlxG.switchState(new KUTValueHandler()); #else FlxG.switchState(new meta.states.TitleState()); #end
+		FlxG.switchState(new meta.states.TitleState());
 	}
 
 	//lalala
 	public static function SwitchToPrimaryMenu(?cl:Class<FlxState>) 
 	{
-		#if HIT_SINGLE MusicBeatState.switchState(new meta.states.HitSingleMenu()); #else
         #if (haxe >= "4.3.0")
 		cl ??= WeeklyMainMenuState;
         #else
 		cl = cl == null ? WeeklyMainMenuState : cl;
         #end
 		MusicBeatState.switchState(cast (Type.createInstance(cl,[]),FlxState));//no but what the fuck
-		#end
-
 	}
 
 	static function setSaveBind() {
