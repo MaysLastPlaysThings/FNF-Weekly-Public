@@ -5,11 +5,6 @@ import haxe.Json;
 import haxe.format.JsonParser;
 import lime.utils.Assets;
 
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
-
 using StringTools;
 
 typedef SwagSong =
@@ -110,7 +105,7 @@ class Song
 			if(mod){
 				rawJson = File.getContent(moddyFile).trim();
 			}else{
-				#if sys
+				#if MODS_ALLOWED
 				rawJson = File.getContent(Paths.json(formattedFolder + '/' + formattedSong)).trim();
 				#else
 				rawJson = Assets.getText(Paths.json(formattedFolder + '/' + formattedSong)).trim();

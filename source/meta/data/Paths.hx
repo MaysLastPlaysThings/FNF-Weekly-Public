@@ -186,10 +186,11 @@ class Paths
 	{
 		return getPath('noteskins/$key', TEXT, library);
 	}
+	#if MODS_ALLOWED	
 	inline static public function modsNoteskin(key:String){
 		return modFolders('noteskins/$key');
 	}
-
+    #end
 	inline static public function shaderFragment(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
@@ -205,14 +206,16 @@ class Paths
 
 	inline static public function exists(asset:String, ?type:openfl.utils.AssetType)
 	{
+		#if desktop
 		if (FileSystem.exists(asset)) return true;
+		#end
 		if (OpenFlAssets.exists(asset)) return true;
 
 		return false;
 	}
 
 	inline static public function getContent(asset:String):Null<String>{
-		#if sys
+		#if desktop
 		if (FileSystem.exists(asset)) return File.getContent(asset);
 		#end
 		if (Assets.exists(asset)) return Assets.getText(asset);
@@ -228,7 +231,7 @@ class Paths
 			return file;
 		}
 		#end
-		return 'assets/videos/$key.$VIDEO_EXT';
+		return Asset2File.getPath('assets/videos/$key.$VIDEO_EXT');
 	}
 
 	static public function sound(key:String, ?library:String):Sound
@@ -296,11 +299,9 @@ class Paths
 
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{
-		#if sys
 		#if MODS_ALLOWED
 		if (!ignoreMods && FileSystem.exists(modFolders(key)))
 			return File.getContent(modFolders(key));
-		#end
 
 		if (FileSystem.exists(getPreloadPath(key)))
 			return File.getContent(getPreloadPath(key));
@@ -406,10 +407,12 @@ class Paths
 				localTrackedAssets.push(file);
 				return currentTrackedAssets.get(file);
 			}
+			#if desktop
 			else if (FileSystem.exists(file)) 
 			{
 				bitmap = BitmapData.fromFile(file);
 			}
+			#end
 			else if (OpenFlAssets.exists(file, IMAGE)) 
 			{
 				bitmap = OpenFlAssets.getBitmapData(file);
