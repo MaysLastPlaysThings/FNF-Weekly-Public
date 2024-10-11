@@ -84,7 +84,9 @@ class OutdatedState extends MusicBeatState
 					CoolUtil.browserLoad("https://gamebanana.com/mods/522709");
 				}
 				else {
+		            #if CHECK_FOR_UPDATES
 					MusicBeatState.switchState(new UpdatingState());
+					#end
 				}
 			}
 			if(controls.BACK) {

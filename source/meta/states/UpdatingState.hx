@@ -1,5 +1,5 @@
 package meta.states; 
-
+#if CHECK_FOR_UPDATES 
 import openfl.net.URLRequest;
 import openfl.net.URLStream;
 import openfl.utils.ByteArray;
@@ -223,3 +223,4 @@ class UpdatingState extends MusicBeatState
         }
 	}
 }
+#end

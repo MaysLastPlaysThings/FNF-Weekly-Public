@@ -39,7 +39,6 @@ import meta.states.*;
 import meta.states.substate.*;
 import gameObjects.*;
 import gameObjects.shader.*;
-import meta.data.Discord.DiscordClient;
 
 using StringTools;
 
@@ -94,7 +93,7 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		#if LUA_ALLOWED
+		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
@@ -111,7 +110,7 @@ class TitleState extends MusicBeatState
 		super.create();
 
 
-		//#if CHECK_FOR_UPDATES 
+		#if CHECK_FOR_UPDATES 
 		if(prompted == false && ClientPrefs.checkForUpdates != 0) {
 			trace('checking for update');
 			// put the link to the version txt in the github here, it will tell the game if a new version came out
@@ -142,7 +141,7 @@ class TitleState extends MusicBeatState
 
 			http.request();
 		}
-		//#end
+		#end
 		
 
 		// IGNORE THIS!!!
